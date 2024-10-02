@@ -1,0 +1,94 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6viprb4utbml"]
+
+[ext_resource type="Script" path="res://scripts/level_1.gd" id="1_vfs4t"]
+[ext_resource type="Script" path="res://scripts/control.gd" id="2_oqomy"]
+[ext_resource type="PackedScene" uid="uid://bhblqne461cvm" path="res://scenes/right_box.tscn" id="3_ujrkt"]
+[ext_resource type="PackedScene" uid="uid://3d0j4qbcdldb" path="res://scenes/left_box.tscn" id="4_elo5g"]
+[ext_resource type="PackedScene" uid="uid://b06vvybl5pe61" path="res://scenes/car.tscn" id="5_x14oo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jfg04"]
+size = Vector2(128.46, 20.7549)
+
+[node name="Level1" type="Node"]
+script = ExtResource("1_vfs4t")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_oqomy")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 807.0
+offset_bottom = 58.0
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 45.0
+offset_right = 809.0
+offset_bottom = 103.0
+
+[node name="Label3" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 89.0
+offset_right = 809.0
+offset_bottom = 147.0
+
+[node name="Button" type="Button" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -30.5
+offset_right = 112.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Continuar"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Timer2" type="Timer" parent="."]
+
+[node name="Chao" type="ColorRect" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -129.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.244776, 0.244776, 0.244776, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Chao" groups=["Floor"]]
+position = Vector2(576.08, 68)
+scale = Vector2(9.03, 1.06)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/StaticBody2D" groups=["Floor"]]
+position = Vector2(-0.119476, -54.717)
+shape = SubResource("RectangleShape2D_jfg04")
+
+[node name="RightBox" parent="." instance=ExtResource("3_ujrkt")]
+position = Vector2(0, 346)
+
+[node name="LeftBox" parent="." instance=ExtResource("4_elo5g")]
+position = Vector2(933, 346)
+
+[node name="Car" parent="." instance=ExtResource("5_x14oo")]
+position = Vector2(580, 453)
+
+[connection signal="pressed" from="Control/Button" to="Control" method="_on_button_pressed"]

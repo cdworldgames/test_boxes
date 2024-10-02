@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://ulyove8yaekd"]
+
+[ext_resource type="Script" path="res://scripts/caixa.gd" id="1_cp2x2"]
+[ext_resource type="Texture2D" uid="uid://if3mjtpwri1h" path="res://icon.svg" id="2_6yuu2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1hshe"]
+size = Vector2(46, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0sl06"]
+size = Vector2(46, 7)
+
+[node name="caixa" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_cp2x2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_1hshe")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 19.5)
+shape = SubResource("RectangleShape2D_0sl06")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_6yuu2")
+
+[node name="Color" type="ColorRect" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -14.0
+offset_top = -24.0
+offset_right = 15.0
+offset_bottom = 5.0
+grow_horizontal = 2
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
